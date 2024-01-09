@@ -13,8 +13,6 @@ build-src: src/
 	cd src && cp *.h ../build/include 
 
 setup:
-	mkdir src
-	cd src && echo $(SRC_MAKE) > Makefile
 	mkdir build
 	mkdir build/obj
 	mkdir lib
