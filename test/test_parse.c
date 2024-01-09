@@ -15,20 +15,29 @@
  */
 #include <stdio.h>
 #include "../build/include/JsonParser.h"
-
-const char *TEST_STR = "{\"x\":10,\"y\":20,\"dat\":{\"name\":\"karlstad\"}}";
+#include "malloc.h"
+const char *TEST_STR = "{\"x\":10,\"y\":20,\"dat\":{\"name\":\"karlstad\",\"location\":\"varmland\"}}";
 
 int main()
 {
     String str = new_string();
     string_append(&str, TEST_STR);
+    String *choppedObjects = malloc(sizeof(String) * 1024);
 
     if (InitialCheck(&str))
     {
-        printf("%s",ChoppObjectString(&str)[0].ptr);
+        choppedObjects = ChoppObjectString(&str);
     }
     else
         return 1;
+
+    for (int i = 0; i < 1024; i++)
+    {
+        if (choppedObjects[i].ptr == NULL)
+            break;
+
+        printf("%s\n", choppedObjects[i].ptr);
+    }
 
     return 0;
 }
