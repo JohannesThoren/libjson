@@ -15,6 +15,7 @@ build-src: src/
 setup:
 	mkdir build
 	mkdir build/obj
+	mdkir build/include
 	mkdir lib
 	cd lib && git clone https://github.com/JohannesThoren/DynamicString.git
 	cd lib/DynamicString && make && mv dynamic_string.o ../../build/obj
