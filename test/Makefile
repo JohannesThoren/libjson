@@ -18,6 +18,9 @@ LIBS:=-l:libjson.a -L../build/
 test_parse: test_parse.c libjson.a
 	$(CC) $(CFLAGS) test_parse.c $(LIBS) -o test_parse
 
+test_json_object: test_json_object.c libjson.a
+	$(CC) $(CFLAGS) test_json_object.c $(LIBS) -o test_json_object
+
 libjson.a:
 	cd .. && make
 

@@ -16,18 +16,20 @@
 #include <stdio.h>
 #include "../build/include/JsonParser.h"
 #include "malloc.h"
-const char *TEST_STR = "{\"x\":10,\"y\":20,\"dat\":{\"name\":\"karlstad\",\"location\":\"varmland\"}}";
+#include "../src/JsonFile.h"
 
-int main()
+int main(int argc, char **argv)
 {
-    String str = new_string();
-    string_append(&str, TEST_STR);
+    String str = ReadStringFromFile("test.json");
     String *choppedObjects = malloc(sizeof(String) * 1024);
+    JObject *obj = j_new_object();
 
     if (InitialCheck(&str))
     {
         choppedObjects = ChoppObjectString(&str);
+        BuildJsonObject(obj, &choppedObjects[0]);
     }
+
     else
         return 1;
 
@@ -38,6 +40,8 @@ int main()
 
         printf("%s\n", choppedObjects[i].ptr);
     }
+
+    printf("%s\n", j_obj_to_str(obj));
 
     return 0;
 }
