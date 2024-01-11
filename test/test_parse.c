@@ -27,6 +27,8 @@ int main(int argc, char **argv)
     if (InitialCheck(&str))
     {
         choppedObjects = ChoppObjectString(&str);
+
+        
         BuildJsonObject(obj, &choppedObjects[0]);
     }
 

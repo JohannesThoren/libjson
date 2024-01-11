@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "jsonparser.h": "c",
-        "dynamic_string.h": "c"
+        "dynamic_string.h": "c",
+        "json.h": "c"
     }
 }

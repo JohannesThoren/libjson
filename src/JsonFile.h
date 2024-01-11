@@ -12,3 +12,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+#ifndef JSONFILE_H
+#define JSONFILE_H
+
+#include "../lib/DynamicString/dynamic_string.h"
+#include "json.h"
+
+String ReadStringFromFile(const char * path);
+JObject JsonFromFile(const String * src);
+
+#endif

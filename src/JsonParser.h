@@ -14,6 +14,7 @@
 
 #ifndef JSONPARSER_H
 #define JSONPARSER_H
+#include "json.h"
 
 #include "../lib/DynamicString/dynamic_string.h"
 
@@ -32,5 +33,6 @@ int InitialCheck(const String * src);
  * Returns a string representing an object
  */
 String * ChoppObjectString(const String *src);
+void *BuildJsonObject(JObject * obj, const String *src);
 
 #endif
