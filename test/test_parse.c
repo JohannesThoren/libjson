@@ -39,7 +39,7 @@ int main(int argc, char **argv)
         if (choppedObjects[i].ptr == NULL)
             break;
 
-        BuildJsonObject(obj, &choppedObjects[i]);
+        BuildJsonObject(obj, choppedObjects[i]);
     }
 
     printf("%s\n", j_obj_to_str(obj));
