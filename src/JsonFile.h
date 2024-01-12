@@ -19,6 +19,6 @@
 #include "json.h"
 
 String ReadStringFromFile(const char * path);
-JObject JsonFromFile(const String * src);
+JObject * JsonFromFile(const String src);
 
 #endif

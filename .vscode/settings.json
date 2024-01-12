@@ -2,6 +2,11 @@
     "files.associations": {
         "jsonparser.h": "c",
         "dynamic_string.h": "c",
-        "json.h": "c"
+        "json.h": "c",
+        "array": "c",
+        "functional": "c",
+        "tuple": "c",
+        "type_traits": "c",
+        "utility": "c"
     }
 }

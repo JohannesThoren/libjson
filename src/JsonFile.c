@@ -39,8 +39,10 @@ String ReadStringFromFile(const char *path)
 
 
 
-JObject JsonFromFile(const String * src) {
+JObject * JsonFromFile(const String src) {
+    JObject * obj = j_new_object();
     ChoppObjectString(src);
+    
 
-
+    return obj;
 }

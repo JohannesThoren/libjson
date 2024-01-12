@@ -1,12 +1,12 @@
 /**
  * Copyright 2024 johannes
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -19,8 +19,10 @@
 #include "malloc.h"
 #include "stdio.h"
 #include "string.h"
+#include "JsonParser.h"
 
 DEFINE_VECTOR_TYPE(JObject, j, JKVPair)
+DEFINE_VECTOR_TYPE(StringVec, strvec, String)
 
 JObject *j_new_object()
 {
@@ -67,15 +69,6 @@ JValue __get(JObject *object, JStr key, JType type, JBool *has_error)
   return error;
 }
 
-// Section for all "add" functions
-
-void j_add_int(JObject *object, JStr key, int value)
-{
-  JValue j_value;
-  j_value.integer = value;
-  __add(object, key, j_value, JSON_TYPE_NUM);
-}
-
 void j_add_str(JObject *object, JStr key, JStr value)
 {
   JValue j_value;
@@ -114,16 +107,6 @@ JBool j_get_bool(JObject *object, JStr key)
     return ret.boolean;
   printf("Type missmatch!\n");
   return F;
-}
-
-int j_get_int(JObject *object, JStr key)
-{
-  JBool has_error = F;
-  JValue ret = __get(object, key, JSON_TYPE_NUM, &has_error);
-  if (!has_error)
-    return ret.integer;
-  printf("Type missmatch!\n");
-  return 0;
 }
 
 JStr j_get_str(JObject *object, JStr key)
@@ -166,8 +149,6 @@ JStr __kvp_to_str(JKVPair *kvp)
   case STR:
     string_printf(&str, "\"%s\": \"%s\"", kvp->key, kvp->value.string);
     break;
-  case NUM:
-    string_printf(&str, "\"%s\": %d", kvp->key, kvp->value.integer);
     break;
   case BOOL:
     string_printf(&str, "\"%s\": %s", kvp->key,
@@ -243,11 +224,25 @@ int __validate_brackets(const JStr json_str)
   return ((l_cb_count == r_cb_count) && (l_sb_count == r_sb_count) ? 0 : -1);
 }
 
+#define cap 1024
+
 JObject *j_str_to_obj(const String json_str)
 {
   JObject *obj = j_new_object();
+  StringVec chopped = strvec_new();
 
-  
+  if (InitialCheck(&json_str))
+  {
+    chopped = ChoppObjectString(json_str);
+  }
+
+  for (int i = 0; i < 1024; i++)
+  {
+    if (chopped.ptr[i].ptr == NULL)
+      break;
+
+    BuildJsonObject(obj, chopped.ptr[i]);
+  }
 
   return obj;
 }

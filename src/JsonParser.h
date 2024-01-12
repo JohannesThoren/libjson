@@ -32,7 +32,7 @@ int InitialCheck(const String * src);
 /**
  * Returns a string representing an object
  */
-String * ChoppObjectString(const String *src);
-void *BuildJsonObject(JObject * obj, const String *src);
 
+StringVec ChoppObjectString(const String src);
+void BuildJsonObject(JObject *obj, const String src);
 #endif
