@@ -17,18 +17,17 @@
 #include "../build/include/JsonParser.h"
 #include "malloc.h"
 #include "../src/JsonFile.h"
+#include "../src/json.h"
 
 int main(int argc, char **argv)
 {
     String str = ReadStringFromFile("test.json");
-    String *choppedObjects = malloc(sizeof(String) * 1024);
+    StringVec choppedObjects = strvec_new();
     JObject *obj = j_new_object();
 
     if (InitialCheck(&str))
     {
-        choppedObjects = ChoppObjectString(&str);
-
-        
+        choppedObjects = ChoppObjectString(str);
     }
 
     else
@@ -36,10 +35,10 @@ int main(int argc, char **argv)
 
     for (int i = 0; i < 1024; i++)
     {
-        if (choppedObjects[i].ptr == NULL)
+        if (choppedObjects.ptr[i].ptr == NULL)
             break;
 
-        BuildJsonObject(obj, choppedObjects[i]);
+        BuildJsonObject(obj, choppedObjects.ptr[i] );
     }
 
     printf("%s\n", j_obj_to_str(obj));
