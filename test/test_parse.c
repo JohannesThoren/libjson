@@ -14,34 +14,16 @@
  * limitations under the License.<
  */
 #include <stdio.h>
-#include "../build/include/JsonParser.h"
-#include "malloc.h"
-#include "../src/JsonFile.h"
-#include "../src/json.h"
+#include "../src/Json.h"
 
 int main(int argc, char **argv)
 {
-    String str = ReadStringFromFile("test.json");
-    StringVec choppedObjects = strvec_new();
-    JObject *obj = j_new_object();
-
-    if (InitialCheck(&str))
-    {
-        choppedObjects = ChoppObjectString(str);
-    }
-
-    else
-        return 1;
-
-    for (int i = 0; i < 1024; i++)
-    {
-        if (choppedObjects.ptr[i].ptr == NULL)
-            break;
-
-        BuildJsonObject(obj, choppedObjects.ptr[i] );
-    }
-
-    printf("%s\n", j_obj_to_str(obj));
+    String s = new_string();
+    printf("object from string\n\n");
+    string_append(&s, "{\"test1\":\"test string\",\"test2\":420.690000,\"test3\":true,\"test4\":false}");
+    JsonObject obj = ObjectFromString(s);
+    printf("\n\n\n\n\n\nobject to string\n\n");
+    printf("%s", ObjectToString(&obj));
 
     return 0;
 }

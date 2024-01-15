@@ -14,14 +14,29 @@
  * limitations under the License.
  */
 
-#include "../src/json.h"
-#include "assert.h"
-#include "string.h"
+#include "../lib/DynamicString/dynamic_string.h"
+#include "../src/Json.h"
+#include <stdio.h>
 int main()
 {
-    JObject *obj = j_new_object();
-    j_add_int(obj, "x", 10);
-    
+
+    JsonObject obj = JsonObject_new();
+    String s = new_string();
+    string_append(&s, "test string");
+    AddElement(&obj, NewElement(STR, "test1", (JsonValue){.string = s}));
+
+    JsonObject subObj = JsonObject_new();
+    String ss = new_string();
+
+    AddElement(&subObj, NewElement(STR, "test1", (JsonValue){.string = s}));
+
+    AddElement(&obj, NewElement(OBJECT, "test5", (JsonValue){.object = &subObj}));
+
+    String str = ObjectToString(&obj);
+    JsonObject obj2 = ObjectFromString(str);
+    String sssssss = ObjectToString(&obj2);
+
+    printf("result %s", sssssss.ptr);
 
     return 0;
 }
