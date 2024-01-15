@@ -18,7 +18,7 @@ setup:
 	mkdir build/obj
 	mkdir build/include
 	mkdir lib
-	cp lib && mkdir DynVec && cd DynVec && wget https://gist.githubusercontent.com/JohannesThoren/5135ea3a6491945ffdecbb511f121360/raw/7dd07a1ed304fb8ef9f34d48fb0862713a82fd62/vector.h
+	cd lib && mkdir DynVec && cd DynVec && wget https://gist.githubusercontent.com/JohannesThoren/5135ea3a6491945ffdecbb511f121360/raw/7dd07a1ed304fb8ef9f34d48fb0862713a82fd62/vector.h
 	cd lib && git clone https://github.com/JohannesThoren/DynamicString.git
 	cd lib/DynamicString && make && mv dynamic_string.o ../../build/obj
 	cd build && mkdir lib && mkdir lib/DynamicString
