@@ -16,9 +16,9 @@
 #define JSONFILE_H
 
 #include "../lib/DynamicString/dynamic_string.h"
-#include "json.h"
+#include "Json.h"
 
 String ReadStringFromFile(const char * path);
-JObject * JsonFromFile(const String src);
+JsonObject JsonFromFile(const String src);
 
 #endif

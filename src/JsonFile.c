@@ -15,7 +15,6 @@
  */
 
 #include "JsonFile.h"
-#include "JsonParser.h"
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -39,9 +38,8 @@ String ReadStringFromFile(const char *path)
 
 
 
-JObject * JsonFromFile(const String src) {
-    JObject * obj = j_new_object();
-    ChoppObjectString(src);
+JsonObject JsonFromFile(const String src) {
+    JsonObject obj = JsonObject_new();
     
 
     return obj;
