@@ -34,9 +34,13 @@ int main()
 
     String str = ObjectToString(&obj);
     JsonObject obj2 = ObjectFromString(str);
-    String sssssss = ObjectToString(&obj2);
 
-    printf("result %s", sssssss.ptr);
+    for (int i = 0; i < obj2.length; i++)
+    {
+        JsonElement elem = *(obj2.ptr + i);
+        printf("type %d, key %s, value %s\n", elem.type, elem.key.ptr, ElementToString(&elem).ptr);
+    }
 
     return 0;
 }
+

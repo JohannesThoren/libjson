@@ -135,17 +135,17 @@ String ObjectToString(JsonObject *object)
     for (int i = 0; i < object->length; i++)
     {
         String elementString = ElementToString(object->ptr + i);
-        printf("ObjectToString %s\n", elementString.ptr);
+        printf("ObjectToString element: %s\n", elementString.ptr);
 
         string_append(&str, elementString.ptr);
-        printf("ObjectToString %s\n", str.ptr);
+        printf("ObjectToString new full string %s\n", str.ptr);
 
         if (i != object->length - 1)
         {
             string_push_char(&str, ',');
         }
     }
-
+    string_push_char(&str, '}');
     return str;
 }
 

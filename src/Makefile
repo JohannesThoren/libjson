@@ -1,5 +1,5 @@
-CC:=clang
+CC=clang
 CFLAGS:=
 *.o: *.c
-	clang -c *.c
+	$(CC) -c *.c
 	mv *.o ../build/obj

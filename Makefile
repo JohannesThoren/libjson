@@ -1,4 +1,4 @@
-CC:=clang
+CC=clang
 CFLAGS:=
 
 OFILES:=
@@ -9,9 +9,9 @@ build: build/obj build-src
 	cd build/obj && ar rcs libjson.a *.o && mv libjson.a ../
 
 build-src: src/
-	cd src && make
+	cd src && make CC=$(CC)
 	cd src && cp *.h ../build/include 
-	cd lib/DynamicString && make && cp dynamic_string.o ../../build/obj
+	cd lib/DynamicString && make CC=$(CC) && cp dynamic_string.o ../../build/obj
 
 setup:
 	mkdir build
